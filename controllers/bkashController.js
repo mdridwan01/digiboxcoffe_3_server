@@ -106,14 +106,24 @@ class bkashController {
         // Step 4️⃣ Trigger Vending Machine
         try {
           const cleanServerURL = SERVER_URL.replace(/\/$/, '');
+           const payload = {
+            uiToken: false,
+            order_quantity: orderQuantity,
+          };
+
+          if (ProductID === 1) {
+            payload.box_1 = 'on';
+          } else if (ProductID === 2) {
+            payload.box_2 = 'on';
+          }  // add more boxes as needed
+
+          // ✅ send request
           const response = await axios.patch(
-            `${cleanServerURL}/api/vending/68e4d654c420911efee3b836`,
+            `${cleanServerURL}/api/vending/68ef47274f42f940e5154411`,
+            payload,
             {
-              box_1: 'on',
-              uiToken: false,
-              order_quantity: orderQuantity,
-            },
-            { headers: { 'Content-Type': 'application/json' } }
+              headers: { 'Content-Type': 'application/json' },
+            }
           );
 
           console.log('✅ Vending machine updated:', response.data);

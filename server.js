@@ -7,8 +7,8 @@ const connectDB = require('./config/db');
 
 dotenv.config();
 const allowedOrigins = [process.env.CLIENT_ORIGIN];
-const applicationUrl =  "https://digicafe2.vercel.app";
-//const applicationUrl =  "http://192.168.68.118:5173";
+const applicationUrl =  "https://digicafe.digibox.com.bd";
+//const applicationUrl =  "http://192.168.68.110:5173";
 
 const app = express();
 app.use(cors({

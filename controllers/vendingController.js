@@ -37,31 +37,12 @@ exports.getVendingById = async (req, res) => {
 exports.updateVending = async (req, res) => {
    const { id } = req.params;
 const { uiToken } = req.body;
-const {box_1, order_quantity}= req.body;
-console.log("Received onKey:", req.body, uiToken, box_1, order_quantity);  // Log the onKey value
+const {box_1, box_2, order_quantity}= req.body;
+console.log("Received onKey:", req.body, uiToken, box_1, box_2, order_quantity);  // Log the onKey value
 
 try {
   const vending = await Vending.findById(id);
   if (!vending) return res.status(404).json({ error: 'Not found' });
-
-  // Loop through "1" to "5" and set values based on onKey
-  // for (let i = 1; i <= 5; i++) {
-  //   const key = i.toString();
-  //   vending[key] = key === onKey ? 'on' : 'off';
-  // }
-
-//   for (let i = 1; i <= 5; i++) {
-//   const key = i.toString();
-//   vending[key] = requestBody[key] || (key === onKey ? 'on' : 'off'); // Set 'on' or 'off' based on request or onKey
-// }
-   // vending.onKey = onKey; // Directly set onKey value
-
-  // Handle uiToken separately if needed
-  
-  //  else {
-  //   vending.uiToken = uiToken;  
-  //   vending.box_1= box_1;// Update uiToken as well
-  // }
 
    // Update uiToken and box_1 if they are provided in the request body
     if (uiToken !== undefined) {
@@ -70,6 +51,9 @@ try {
     
     if (box_1 !== undefined) {
       vending.box_1 = box_1; // Update box_1 field in vending object
+    }
+     if (box_2 !== undefined) {
+      vending.box_2 = box_2; // Update box_1 field in vending object
     }
     if (order_quantity !== undefined) {
       vending.order_quantity = order_quantity; // Update box_1 field in vending object
